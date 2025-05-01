@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fertilizer Guide</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-green-50 text-gray-800 p-6">
+
+  <div class="max-w-5xl mx-auto space-y-10">
+    <h1 class="text-4xl font-bold text-green-700 text-center">🌾 Fertilizer Guide</h1>
+
+    <!-- Section 1: Best Fertilizers -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">Top Fertilizers and Their Uses</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+         <!-- Urea -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h2 class="text-2xl font-bold text-green-600 mb-2">Urea</h2>
+        <p><strong>Use:</strong> High nitrogen source</p>
+        <p><strong>Specialty:</strong> Boosts leafy growth</p>
+        <a href="urea.html" class="text-green-500 underline">More Info</a>
+      </div>
+
+      <!-- DAP -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h2 class="text-2xl font-bold text-green-600 mb-2">DAP (Diammonium Phosphate)</h2>
+        <p><strong>Use:</strong> High phosphorus</p>
+        <p><strong>Specialty:</strong> Strong root development</p>
+        <a href="dap.html" class="text-green-500 underline">More Info</a>
+      </div>
+
+      <!-- Compost -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h2 class="text-2xl font-bold text-green-600 mb-2">Compost</h2>
+        <p><strong>Use:</strong> Organic soil health</p>
+        <p><strong>Specialty:</strong> Improves soil quality</p>
+        <a href="compost.html" class="text-green-500 underline">More Info</a>
+      </div>
+
+      <!-- MOP -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h2 class="text-2xl font-bold text-green-600 mb-2">MOP (Muriate of Potash)</h2>
+        <p><strong>Use:</strong> High potassium</p>
+        <p><strong>Specialty:</strong> Increases fruiting and resistance</p>
+        <a href="mop.html" class="text-green-500 underline">More Info</a>
+      </div>
+
+      <!-- SSP -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h2 class="text-2xl font-bold text-green-600 mb-2">Single Super Phosphate (SSP)</h2>
+        <p><strong>Use:</strong> Phosphorus and sulfur</p>
+        <p><strong>Specialty:</strong> Enhances root and flowering</p>
+        <a href="ssp.html" class="text-green-500 underline">More Info</a>
+      </div>
+
+      <!-- Ammonium Sulphate -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h2 class="text-2xl font-bold text-green-600 mb-2">Ammonium Sulphate</h2>
+        <p><strong>Use:</strong> Nitrogen and sulfur</p>
+        <p><strong>Specialty:</strong> Good for acidic soils</p>
+        <a href="ammonium_sulphate.html" class="text-green-500 underline">More Info</a>
+      </div>
+
+      <!-- Vermicompost -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h2 class="text-2xl font-bold text-green-600 mb-2">Vermicompost</h2>
+        <p><strong>Use:</strong> Organic compost from worms</p>
+        <p><strong>Specialty:</strong> Rich natural fertilizer</p>
+        <a href="vermicompost.html" class="text-green-500 underline">More Info</a>
+      </div>
+
+      <!-- Bone Meal -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h2 class="text-2xl font-bold text-green-600 mb-2">Bone Meal</h2>
+        <p><strong>Use:</strong> Phosphorus and calcium</p>
+        <p><strong>Specialty:</strong> Boosts flowering and fruiting</p>
+        <a href="bone_meal.html" class="text-green-500 underline">More Info</a>
+      </div>
+
+      <!-- NPK -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h2 class="text-2xl font-bold text-green-600 mb-2">NPK (Commercial Mix)</h2>
+        <p><strong>Use:</strong> Balanced NPK</p>
+        <p><strong>Specialty:</strong> All-round plant growth</p>
+        <a href="npk.html" class="text-green-500 underline">More Info</a>
+      </div>
+
+      <!-- Green Manure -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h2 class="text-2xl font-bold text-green-600 mb-2">Green Manure</h2>
+        <p><strong>Use:</strong> Natural nitrogen fixer</p>
+        <p><strong>Specialty:</strong> Improves soil fertility naturally</p>
+        <a href="green_manure.html" class="text-green-500 underline">More Info</a>
+      </div>
+    </section>
+
+      <!-- Section 2: Search Fertilizer -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-4">Search Fertilizer by Crop or Pest</h2>
+        <input id="searchInput" type="text" placeholder="Enter crop or pest name..." class="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400" oninput="recommendFertilizer()">
+       
+        
+        <div id="searchResult" class="mt-4 bg-white p-4 rounded shadow hidden"></div>
+      </section>
+  
+      <!-- Section 3: Camera Scan -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-4">Camera Scan for Pest Detection</h2>
+        <input id="cameraInput" type="file" accept="image/*" capture="environment" class="block w-full p-3 rounded border border-gray-300">
+        
+        <div id="cameraResult" class="mt-4 bg-white p-4 rounded shadow hidden">
+          <h3 class="text-xl font-semibold mb-4">Uploaded Image</h3>
+          <img id="uploadedImage" src="" alt="Uploaded Image" class="w-full h-auto mb-4">
+          <div id="pestResult" class="text-lg font-semibold text-green-700"></div>
+          <div id="fertilizerResult" class="mt-4"></div>
+        </div>
+      </section>
+      
+  
+      <a href="app.html" class="inline-block mt-8 text-green-700 underline hover:text-green-900">⬅ Back to Home</a>
+  
+    </div>
+
+   
+
+  <script src="fertilizers.js"></script>
+</body>
+</html>

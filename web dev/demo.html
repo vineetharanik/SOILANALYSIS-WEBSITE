@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up - Crop Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
+  <script type="module">
+    // Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { getFirestore, setDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDDuNAIhyYjVXm3w0M6SohQoqqs3TKqTsw",
+      authDomain: "soil-analysis-web.firebaseapp.com",
+      projectId: "soil-analysis-web",
+      storageBucket: "soil-analysis-web.firebasestorage.app",
+      messagingSenderId: "406391157122",
+      appId: "1:406391157122:web:c4a88cb2ce711f32049f9b",
+      measurementId: "G-2PGHZHL819"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Function to sign up the user
+    async function signUpUser(event) {
+      event.preventDefault();
+
+      const fullname = document.getElementById("fullname").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        // Create user with email and password
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Save user data to Firestore
+        await setDoc(doc(db, "users", user.uid), {
+          fullname: fullname,
+          email: email,
+          createdAt: serverTimestamp(),
+        });
+
+        alert("User created successfully!");
+        window.location.href = "app.html";  // Redirect after successful signup
+      } catch (error) {
+        alert("Error: " + error.message);
+      }
+    }
+
+    // Attach the signUpUser function to form submission
+    document.getElementById("signupForm").addEventListener("submit", signUpUser);
+  </script>
+</head>
+<body class="bg-green-50 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold text-green-700 mb-6 text-center">Create an Account</h2>
+    <form id="signupForm">
+      <div class="mb-4">
+        <label for="fullname" class="block text-gray-700 mb-2">Full Name</label>
+        <input type="text" id="fullname" name="fullname" required class="w-full px-4 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 mb-2">Email</label>
+        <input type="email" id="email" name="email" required class="w-full px-4 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="username" class="block text-gray-700 mb-2">Username</label>
+        <input type="text" id="username" name="username" required class="w-full px-4 py-2 border rounded-md">
+      </div>
+      <div class="mb-6">
+        <label for="password" class="block text-gray-700 mb-2">Password</label>
+        <input type="password" id="password" name="password" required class="w-full px-4 py-2 border rounded-md">
+      </div>
+      <button type="submit" class="w-full bg-green-700 text-white py-2 rounded-md hover:bg-green-800 transition">Sign Up</button>
+    </form>
+    <p class="mt-4 text-center text-sm text-gray-600">
+      Already have an account?
+      <a href="login.html" class="text-green-700 font-semibold hover:underline">Log in</a>
+    </p>
+  </div>
+</body>
+</html>

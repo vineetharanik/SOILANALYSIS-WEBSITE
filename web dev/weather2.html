@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather Information</title>
+  <script defer src="weather.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-green-50 text-gray-800 p-6">
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold text-green-700 mb-4">🌦️ Weather Information</h1>
+
+    <div class="bg-white p-6 rounded shadow space-y-4" id="weather">
+      <h2 class="text-2xl font-semibold text-gray-800">Current Weather</h2>
+
+      <!-- City input and button to get weather -->
+      <div class="flex items-center space-x-4 mb-4">
+        <input type="text" id="city-input" class="border px-4 py-2 rounded" placeholder="Enter city name">
+        <button id="get-weather-btn" class="bg-green-500 text-white px-4 py-2 rounded">Get Weather</button>
+      </div>
+
+      <!-- Weather result will be displayed here -->
+      <div id="weather-result" class="hidden">
+        <p><strong>🌡️ Temperature:</strong> <span id="temperature"></span></p>
+        <p><strong>🌥️ Weather:</strong> <span id="weather-description"></span></p>
+        <p><strong>💧 Humidity:</strong> <span id="humidity"></span>%</p>
+        <p><strong>🌬️ Wind Speed:</strong> <span id="wind-speed"></span></p>
+      </div>
+
+      <!-- Error message if city is not found -->
+      <div id="error-message" class="hidden text-red-500">
+        <p>⚠️ City not found. Please try again.</p>
+      </div>
+    </div>
+
+    <a href="app.html" class="mt-6 inline-block text-green-700 underline hover:text-green-900">⬅ Back to Soil Analysis</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Rotation</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-green-50 text-gray-800">
+
+  <header class="bg-green-700 text-white py-4">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">🌾 Crop Rotation</h1>
+      <nav>
+        <ul class="flex space-x-4">
+          <li><a href="app.html" class="hover:underline">Home</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="max-w-6xl mx-auto px-4 py-8">
+    <h2 class="text-3xl font-semibold mb-6">Crop Rotation Suggestions</h2>
+
+    <form id="rotationForm" class="bg-white p-6 rounded-lg shadow-lg">
+      <label for="crop" class="block text-lg font-medium mb-2">Select Your Crop:</label>
+      <select id="crop" class="w-full p-2 border rounded-lg mb-4">
+        <option value="">-- Select Crop --</option>
+        <option value="Tomato">Tomato</option>
+        <option value="Corn">Corn</option>
+        <option value="Rice">Rice</option>
+      </select>
+      <button type="submit" class="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800">Get Rotation Plan</button>
+    </form>
+
+    <div id="rotationResult" class="mt-6 p-6 bg-white rounded-lg shadow-lg hidden"></div>
+
+  </section>
+
+  <footer class="bg-green-700 text-white py-6 mt-12">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>&copy; 2025 Crop Tracker. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const rotationPlans = {
+      "Tomato": "After Tomato, plant Beans, Peas, or Carrots.",
+      "Corn": "After Corn, plant Legumes like Soybeans or Peanuts.",
+      "Rice": "After Rice, plant pulses like Chickpeas or Blackgram."
+    };
+
+    const form = document.getElementById('rotationForm');
+    const resultDiv = document.getElementById('rotationResult');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const crop = document.getElementById('crop').value;
+      if (rotationPlans[crop]) {
+        resultDiv.innerHTML = `<h3 class="text-2xl font-bold mb-4">Rotation Plan for ${crop}</h3><p class="text-lg">${rotationPlans[crop]}</p>`;
+        resultDiv.classList.remove('hidden');
+      } else {
+        resultDiv.innerHTML = `<p class="text-lg text-red-600">No rotation plan found for the selected crop.</p>`;
+        resultDiv.classList.remove('hidden');
+      }
+    });
+  </script>
+
+</body>
+</html>

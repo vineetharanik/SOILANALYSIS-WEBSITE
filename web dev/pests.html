@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pest Control</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-green-50 text-gray-800">
+  <!-- Header -->
+  <header class="bg-green-700 text-white py-4">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">🐛 Pest Control</h1>
+      <nav>
+        <ul class="flex space-x-4">
+          <li><a href="app.html" class="hover:underline">Home</a></li>
+          <li><a href="weather2.html" class="hover:underline">Weather</a></li>
+          <li><a href="pests.html" class="hover:underline font-semibold">Pest Control</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Search Section -->
+  <section class="max-w-4xl mx-auto py-12 px-4">
+    <input type="text" id="search-bar" class="w-full p-4 mb-6 border rounded-md" placeholder="Search for a pest..." />
+    <div id="pest-info"></div> <!-- Display Pest Info Here -->
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-700 text-white py-6 mt-12">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>&copy; 2025 Crop Tracker. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Link to external JS file -->
+  <script src="pests.js"></script>
+</body>
+</html>

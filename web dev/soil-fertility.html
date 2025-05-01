@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Soil Fertility Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-green-50 text-gray-800">
+  <div class="max-w-2xl mx-auto px-6 py-12">
+    <h1 class="text-3xl font-bold mb-6 text-center">🧮 Soil Fertility Test</h1>
+
+    <form id="quizForm" class="space-y-6">
+      <!-- Question 1 -->
+      <div>
+        <label class="block mb-2 font-semibold">1. Does water drain easily from your soil?</label>
+        <select class="w-full p-2 border rounded" name="q1" required>
+          <option value="">Select answer</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <!-- Question 2 -->
+      <div>
+        <label class="block mb-2 font-semibold">2. Does your soil have earthworms or insects?</label>
+        <select class="w-full p-2 border rounded" name="q2" required>
+          <option value="">Select answer</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <!-- Question 3 -->
+      <div>
+        <label class="block mb-2 font-semibold">3. Do plants grow healthy in your field?</label>
+        <select class="w-full p-2 border rounded" name="q3" required>
+          <option value="">Select answer</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <!-- Additional Question 4: Soil pH -->
+      <div>
+        <label class="block mb-2 font-semibold">4. What is the pH level of your soil?</label>
+        <select class="w-full p-2 border rounded" name="q4" required>
+          <option value="">Select answer</option>
+          <option value="acidic">Acidic (pH < 6)</option>
+          <option value="neutral">Neutral (pH 6-7)</option>
+          <option value="alkaline">Alkaline (pH > 7)</option>
+        </select>
+      </div>
+
+      <!-- Additional Question 5: Soil Texture -->
+      <div>
+        <label class="block mb-2 font-semibold">5. What is the texture of your soil?</label>
+        <select class="w-full p-2 border rounded" name="q5" required>
+          <option value="">Select answer</option>
+          <option value="loamy">Loamy (Ideal for most crops)</option>
+          <option value="clayey">Clayey (Heavy, holds moisture)</option>
+          <option value="sandy">Sandy (Drains water fast)</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Check Fertility</button>
+    </form>
+
+    <!-- Result Section -->
+    <div id="result" class="mt-8 text-xl font-bold text-center hidden"></div>
+  </div>
+
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      
+      const q1 = document.querySelector('[name="q1"]').value;
+      const q2 = document.querySelector('[name="q2"]').value;
+      const q3 = document.querySelector('[name="q3"]').value;
+      const q4 = document.querySelector('[name="q4"]').value;
+      const q5 = document.querySelector('[name="q5"]').value;
+
+      let score = 0;
+      
+      // Calculate score based on answers
+      if (q1 === "yes") score++;
+      if (q2 === "yes") score++;
+      if (q3 === "yes") score++;
+      
+      // Add new logic based on pH and texture
+      if (q4 === "neutral") score++;
+      if (q5 === "loamy") score++;
+
+      const resultDiv = document.getElementById("result");
+      resultDiv.classList.remove("hidden");
+
+      // Determine the result based on the score
+      if (score === 5) {
+        resultDiv.textContent = "✅ Your soil is highly fertile!";
+        resultDiv.classList.add("text-green-700");
+      } else if (score === 4) {
+        resultDiv.textContent = "⚠️ Your soil is moderately fertile.";
+        resultDiv.classList.add("text-yellow-600");
+      } else {
+        resultDiv.textContent = "❌ Your soil may not be fertile. Consider adding organic matter and improving soil structure.";
+        resultDiv.classList.add("text-red-600");
+      }
+    });
+  </script>
+</body>
+</html>
+

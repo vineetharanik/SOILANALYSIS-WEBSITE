@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script>
+    // Predefined Crop Data
+    const cropsData = {
+      "Tomato": {
+        "fertilizer": "NPK (Nitrogen, Phosphorus, Potassium) 10-10-10 every 3 weeks",
+        "watering": "Water regularly, 2-3 times a week.",
+        "pests": "Common pests: aphids, tomato hornworm.",
+        "growthStages": [
+          { stage: "Germination", duration: "7-10 days", action: "Ensure soil moisture is adequate." },
+          { stage: "Vegetative", duration: "3-4 weeks", action: "Apply NPK fertilizer." },
+          { stage: "Flowering", duration: "2-3 weeks", action: "Reduce watering, focus on pest control." },
+          { stage: "Fruit Setting", duration: "4-6 weeks", action: "Increase watering, check for pests regularly." },
+        ]
+      },
+      "Corn": {
+        "fertilizer": "Urea (Nitrogen-based) at planting and after 30 days.",
+        "watering": "Water deeply once a week.",
+        "pests": "Common pests: Corn borers, aphids.",
+        "growthStages": [
+          { stage: "Germination", duration: "5-7 days", action: "Keep soil moist but not soggy." },
+          { stage: "Vegetative", duration: "4-5 weeks", action: "Apply nitrogen-rich fertilizer." },
+          { stage: "Tasseling", duration: "3-4 weeks", action: "Ensure adequate water supply." },
+          { stage: "Maturity", duration: "7-10 days", action: "Decrease water, focus on pest control." },
+        ]
+      }
+    };
+
+    // Handle form submission
+    function showCropDetails(event) {
+      event.preventDefault();
+
+      const cropName = document.getElementById('cropName').value.trim(); // Get the crop name and remove any leading/trailing spaces
+      const plantingDate = new Date(document.getElementById('plantingDate').value); // Get the planting date
+
+      // Check if crop exists in our predefined data
+      if (cropsData[cropName]) {
+        const crop = cropsData[cropName];
+        
+        let output = `<h2>Crop: ${cropName}</h2>`;
+        output += `<p><strong>Fertilizer:</strong> ${crop.fertilizer}</p>`;
+        output += `<p><strong>Watering:</strong> ${crop.watering}</p>`;
+        output += `<p><strong>Pests to look out for:</strong> ${crop.pests}</p>`;
+
+        // For each growth stage, calculate the date range based on the planting date
+        crop.growthStages.forEach(stage => {
+          let stageStartDate = new Date(plantingDate);
+          let stageDurationInDays = parseInt(stage.duration.split('-')[1]); // Assuming "duration" format is "x-y days"
+
+          stageStartDate.setDate(stageStartDate.getDate() + stageDurationInDays);
+
+          output += `<h3>${stage.stage} (Duration: ${stage.duration})</h3>`;
+          output += `<p><strong>Action:</strong> ${stage.action}</p>`;
+          output += `<p><strong>Expected Date Range:</strong> ${stageStartDate.toDateString()}</p>`;
+        });
+
+        document.getElementById('crop-details').innerHTML = output; // Display the results in the designated area
+      } else {
+        document.getElementById('crop-details').innerHTML = `<p>Sorry, we do not have information for this crop. Please check the spelling or try another crop.</p>`;
+      }
+    }
+  </script>
+</head>
+<body class="bg-green-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-green-700 text-white py-4">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">🌾 Crop Tracker</h1>
+      <nav>
+        <ul class="flex space-x-4">
+          <li><a href="app.html" class="hover:underline">Home</a></li>
+          <li><a href="app1.html" class="hover:underline">Soil Analysis</a></li>
+          <li><a href="weather2.html" class="hover:underline">Weather</a></li>
+          <li><a href="pests.html" class="hover:underline">Pests</a></li>
+          <li><a href="crop-info.html" class="hover:underline">Crop Info</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Crop Tracker Content -->
+  <section class="max-w-6xl mx-auto px-4 py-8">
+    <h2 class="text-3xl font-semibold mb-6">Track Your Crops</h2>
+    <p class="text-lg text-gray-700 mb-6">
+      Enter your crop name and planting date to get detailed care instructions.
+    </p>
+
+    <form id="crop-form" class="bg-white p-6 rounded-lg shadow-lg" onsubmit="showCropDetails(event)">
+      <label for="cropName" class="block text-sm font-medium text-gray-700">Crop Name</label>
+      <input type="text" id="cropName" class="mt-2 p-2 border rounded-md w-full" placeholder="Enter Crop Name (e.g., Tomato)" required>
+      <label for="plantingDate" class="block text-sm font-medium text-gray-700 mt-4">Planting Date</label>
+      <input type="date" id="plantingDate" class="mt-2 p-2 border rounded-md w-full" required>
+      <button type="submit" class="mt-4 bg-green-700 text-white py-2 px-4 rounded-lg hover:bg-green-800">Get Crop Details</button>
+    </form>
+
+    <div id="crop-details" class="mt-8"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-700 text-white py-6 mt-12">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>&copy; 2025 Crop Tracker. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Soil Analysis App</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <script type="module">
+    // Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDDuNAIhyYjVXm3w0M6SohQoqqs3TKqTsw",
+      authDomain: "soil-analysis-web.firebaseapp.com",
+      projectId: "soil-analysis-web",
+      storageBucket: "soil-analysis-web.firebasestorage.app",
+      messagingSenderId: "406391157122",
+      appId: "1:406391157122:web:c4a88cb2ce711f32049f9b",
+      measurementId: "G-2PGHZHL819"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Track homepage visit
+    addDoc(collection(db, "user_activity"), {
+      action: "visited_homepage",
+      timestamp: serverTimestamp()
+    });
+
+    // Track link clicks
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          addDoc(collection(db, "user_activity"), {
+            action: "clicked_link",
+            link: link.getAttribute("href"),
+            timestamp: serverTimestamp()
+          });
+        });
+      });
+    });
+
+    // Track time spent
+    const startTime = Date.now();
+    window.addEventListener("beforeunload", () => {
+      const duration = Math.floor((Date.now() - startTime) / 1000);
+      addDoc(collection(db, "user_activity"), {
+        action: "session_ended",
+        duration_seconds: duration,
+        timestamp: serverTimestamp()
+      });
+    });
+
+    
+
+  </script>
+</head>
+<body class="bg-green-50 text-gray-800">
+
+  <!-- Main Container -->
+  <div class="max-w-7xl mx-auto space-y-12 p-6">
+
+    <!-- Title Section -->
+    <header class="text-center">
+      <h1 class="text-4xl font-bold text-green-700">🌱 Soil Analysis and Agricultural Solutions</h1>
+      <p class="text-xl text-gray-600 mt-2">Find out the best practices for healthy soil, crops, and pest management.</p>
+    </header>
+
+    
+
+    <!-- Section 1: Soil Analysis -->
+    <section class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+      <h2 class="text-2xl font-semibold text-green-600 mb-4">Soil Analysis</h2>
+      <p>Get detailed information on your soil's health and composition. Receive personalized recommendations for improving soil quality.</p>
+      <a href="app1.html" class="text-green-500 underline">Start Soil Analysis</a>
+    </section>
+
+    <!-- Section 2: Weather Report -->
+    <section class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+      <h2 class="text-2xl font-semibold text-green-600 mb-4">Weather Report</h2>
+      <p>Get live weather updates to plan your farming activities. Check the forecast to protect your crops from adverse conditions.</p>
+      <a href="weather2.html" class="text-green-500 underline">View Weather Report</a>
+    </section>
+
+    <!-- Section 3: Fertilizer Guide -->
+    <section class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+      <h2 class="text-2xl font-semibold text-green-600 mb-4">Fertilizer Guide</h2>
+      <p>Learn about different fertilizers and their uses. Get recommendations based on your soil and crop type.</p>
+      <a href="fertilizers.html" class="text-green-500 underline">Explore Fertilizer Guide</a>
+    </section>
+
+    <!-- Section 4: Crop Suggestions -->
+    <section class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+      <h2 class="text-2xl font-semibold text-green-600 mb-4">Crop Suggestions</h2>
+      <p>Receive personalized crop suggestions based on your soil type, climate, and other factors.</p>
+      <a href="crop-info.html" class="text-green-500 underline">Crop Information</a>
+    </section>
+
+    <!-- Section 5: Pest and Fertilizer Info -->
+    <section class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+      <h2 class="text-2xl font-semibold text-green-600 mb-4">Pest and Fertilizer Information</h2>
+      <p>Identify common pests and get suggestions for the right fertilizers to manage your crops effectively.</p>
+      <a href="pests.html" class="text-green-500 underline">Explore Pests</a>
+    </section>
+
+    <!-- Section 6: Crop Tracking -->
+    <section class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+      <h2 class="text-2xl font-semibold text-green-600 mb-4">Crop Tracking</h2>
+      <p>Track the growth and health of your crops. Monitor the development of your crops and make data-driven decisions.</p>
+      <a href="tracker.html" class="text-green-500 underline">Crop Tracking</a>
+    </section>
+
+    <!-- Section 7: Crop Rotation -->
+    <section class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+      <h2 class="text-2xl font-semibold text-green-600 mb-4">Crop Rotation</h2>
+      <p>Plan your crop rotation to improve soil health!</p>
+      <a href="crop-rotation.html" class="text-green-500 underline">Crop Rotation</a>
+    </section>
+
+    <!-- Section 8: Soil Fertility -->
+    <section class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+      <h2 class="text-2xl font-semibold text-green-600 mb-4">Soil Fertility Test</h2>
+      <p>Answer a few simple questions to check if your soil is fertile.</p>
+      <a href="soil-fertility.html" class="text-green-500 underline">Start Test</a>
+    </section>
+
+  </div>
+</body>
+</html>
